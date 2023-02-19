@@ -6,7 +6,7 @@ from settings.settings import Settings
 
 
 __settings_path = Path.cwd() / "settings/settings.json"
-__lang_path = Path.cwd() / "settings/lang_not_encoded.json"
+__lang_path = Path.cwd() / "settings/lang.json"
 
 
 def read_lang_file(language: str, file: Path = __lang_path) -> LanguageVersion:
