@@ -10,6 +10,7 @@ from settings import settings_functions
 from view import View
 
 _default_settings_path = Path.cwd() / "settings/default_settings.json"
+_str_len_limit = 60
 
 
 class Controller:
@@ -154,13 +155,15 @@ class Controller:
         """Creates a TopLevel window (list of all words)."""
         self.view.set_up_list(dictionary=self.model.model.dictionary,
                               scores=self.model.model.scores,
-                              title=self.view.lang.title_wordlist)
+                              title=self.view.lang.title_wordlist,
+                              str_len_limit=_str_len_limit)
 
     def show_session_list(self):
         """Creates a TopLevel window (list of words from last session)."""
         self.view.set_up_list(dictionary=self.model.model.dictionary,
                               scores=self.model.model.session_dict,
-                              title=self.view.lang.title_session_wordlist)
+                              title=self.view.lang.title_session_wordlist,
+                              str_len_limit=_str_len_limit)
 
     def reset_points(self):
         """Resets scores dict on user's demand."""
@@ -268,7 +271,7 @@ class Controller:
            Returns None if data has been successfully added.
            Otherwise, returns str (shows warning to the end user)"""
         try:
-            data = self.model.validate_data(path)
+            data = self.model.validate_data(path, _str_len_limit)
             if data is None:    # too little data; must be at least 10 rows
                 return showwarning(self.view.lang.title6,
                                    self.view.lang.message9)

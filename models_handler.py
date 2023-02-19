@@ -9,8 +9,6 @@ from openpyxl import load_workbook
 from model import Model
 from db import DB
 
-_str_len_limit = 60
-
 
 @dataclass
 class ModelsHandler:
@@ -58,7 +56,7 @@ class ModelsHandler:
         return name
 
     @staticmethod
-    def validate_data(file_path: Path, str_len_limit: int = _str_len_limit) -> dict[str, str] | None:
+    def validate_data(file_path: Path, str_len_limit: int) -> dict[str, str] | None:
         """Validates data from the file provided by end user.
            str_len_limit - max len of string allowed.
            Returns a dict of word: translation pairs of up to 1000 pairs.

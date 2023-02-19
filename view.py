@@ -327,7 +327,7 @@ class View(ctk.CTk):
         self.session_view.displayed_word.set(word)
 
     def set_up_list(self, dictionary: dict[str, str], scores: dict[str, int],
-                    title: str):
+                    title: str, str_len_limit: int):
         # load headings
         first_language, second_language = self.get_languages_names()
         headings = [self.lang.nr,
@@ -337,7 +337,7 @@ class View(ctk.CTk):
 
         # create WordList instance
         self.word_list = WordList(title=title)
-        self.word_list.fill_in_tree(dictionary, scores, headings, length=30)
+        self.word_list.fill_in_tree(dictionary, scores, headings, length=str_len_limit)
 
         # set style accordingly to current appearance mode
         appearance_mode = self.appearance_mode_om.get()
@@ -498,6 +498,7 @@ class SessionView(ctk.CTkToplevel):
             self.submit_button.configure(state="normal")
         else:
             self.submit_button.configure(state="disabled")
+
 
 class WordList(ctk.CTkToplevel):
     def __init__(self, title: str):
