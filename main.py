@@ -11,7 +11,6 @@ def main():
 
     # create MVC and start the app
     model = ModelsHandler(db=SQLite3DB())
-    print(model.db.available_dictionaries)
     view = View(settings)
     controller = Controller(model, view)
     controller.start_app(name=settings.dictionary_name)
