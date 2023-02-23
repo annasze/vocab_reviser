@@ -17,6 +17,30 @@ class View(ctk.CTk):
         super().__init__()
         # configure window
         self.title("Vocab Reviser")
+
+        self.resizable(0, 0)
+        #self.geometry("1600x900")
+        
+        width = 1000
+        height = 600
+
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        
+        x = (screen_width/2) - (width/2)
+        y = (screen_height/2) - (height/2)
+
+        self.geometry('%dx%d+%d+%d' % (width, height, x, y))
+        
+        #AM - Print the screen size - first display
+        #print("Screen width:", screen_width)
+        #print("Screen height:", screen_height)
+
+        self.grid_columnconfigure([0, 2], weight=0)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=0)
+
         self.grid_columnconfigure([0, 2], weight=0)
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
