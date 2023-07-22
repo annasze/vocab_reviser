@@ -36,7 +36,6 @@ en:
   confirm: Confirm
   show_info_chb: display notification
   error: Error
-  exit: Exit
   success: Success
   are_you_sure: Are you sure?
   add_word: Add word
@@ -46,7 +45,7 @@ en:
   info: Information
   note: |-
     The first column in the file should contain words/phrases in your native language, the second column - in a foreign language.
-    Accepted file formats - xls, xlsx, xlsm, xlsb. Accepted size - up to 200 rows.
+    Accepted file formats - xls, xlsx, xlsm, xlsb. Accepted size - from 10 to 200 rows.
     Do NOT use column headings.
     --- Uncheck 'display notification' to not display this window again ---
   already_exists: This word already exists.

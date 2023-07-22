@@ -1,16 +1,23 @@
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from new_dictionary_handler import NewDictHandlerForJSONRepo
+from handlers.new_dictionary_handler import NewDictHandlerForJSONRepo
 
 
 @dataclass
-class SessionSettings:
-    __slots__ = ["words_per_session", "ignore_capitalization", "ignore_punctuation", "seconds"]
-    words_per_session: int
-    ignore_capitalization: bool
-    ignore_punctuation: bool
-    seconds: int
+class AppSettings:
+    DEFAULT_COLOR_THEME: str = "blue"
+    LIGHT_THEME: dict[str, str] = field(default_factory=lambda: dict(background="gray86", foreground="black"))
+    DARK_THEME: dict[str, str] = field(default_factory=lambda: dict(background="gray17", foreground="#DCE4EE"))
+    LIGHT_THEME_HEADING: dict[str, str] = field(default_factory=lambda: dict(background="#3B8ED0", foreground="#DCE4EE"))
+    DARK_THEME_HEADING: dict[str, str] = field(default_factory=lambda: dict(background="#1F6AA5", foreground="#DCE4EE"))
+    LOCALE: dict[str, str] = field(default_factory=lambda: dict(polski="pl", English="en", español="es"))
+    DB_PATH: Path = Path("json_db.json")
+    USER_SETTINGS_PATH: str = Path("settings.json")
+    MAX_PHRASE_LENGTH: int = 60
+    NEW_DICT_HANDLER = NewDictHandlerForJSONRepo
+    THRESHOLD: float = 0.2
+    TRANSPOSITION_COST: float | int = 1
 
 
 @dataclass
@@ -35,17 +42,12 @@ class UserSettings:
 
 
 @dataclass
-class AppSettings:
-    DEFAULT_COLOR_THEME: str = "blue"
-    LIGHT_THEME: dict[str, str] = field(default_factory=lambda: dict(background="gray86", foreground="black"))
-    DARK_THEME: dict[str, str] = field(default_factory=lambda: dict(background="gray17", foreground="#DCE4EE"))
-    LIGHT_THEME_HEADING: dict[str, str] = field(default_factory=lambda: dict(background="#3B8ED0", foreground="#DCE4EE"))
-    DARK_THEME_HEADING: dict[str, str] = field(default_factory=lambda: dict(background="#1F6AA5", foreground="#DCE4EE"))
-    LOCALE: dict[str, str] = field(default_factory=lambda: dict(polski="pl", English="en", español="es"))
-    DB_PATH: Path = Path("json_db.json")
-    USER_SETTINGS_PATH: str = Path("settings.json")
-    MAX_PHRASE_LENGTH: int = 60
-    NEW_DICT_HANDLER = NewDictHandlerForJSONRepo
+class SessionSettings:
+    __slots__ = ["words_per_session", "ignore_capitalization", "ignore_punctuation", "seconds"]
+    words_per_session: int
+    ignore_capitalization: bool
+    ignore_punctuation: bool
+    seconds: int
 
 
 settings = AppSettings()

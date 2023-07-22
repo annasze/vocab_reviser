@@ -3,18 +3,18 @@ from typing import Optional
 import i18n
 from openpyxl.utils.exceptions import InvalidFileException
 
-import session_handlers
-from learning_data import LearningData
-from list_gui import WordList
-from main_gui import MainGui
-from repository import RepositoryProtocol
-from session_controller import SessionController
-from session_gui import SessionGui
+from handlers import session_handlers
+from data.learning_data import LearningData
+from GUIs.list_gui import WordList
+from GUIs.main_gui import MainGui
+from data.repository import RepositoryProtocol
+from controllers.session_controller import SessionController
+from GUIs.session_gui import SessionGui
 from settings import UserSettings, settings
 
 
 class MainController:
-    def __init__(self,gui: MainGui, repository: RepositoryProtocol, handlers):
+    def __init__(self, gui: MainGui, repository: RepositoryProtocol, handlers):
         self.session_controller = None
         self.gui = gui
         self.repository = repository
@@ -84,7 +84,7 @@ class MainController:
     def remove_word(self, event=None):
         self.learning_data.remove_word(self.gui.word_to_remove)
         self.update_widgets()
-        self.change_word_per_session(self.gui.words_per_session)
+        self.change_word_per_session()
 
     def reset_scores(self):
         if not self.gui.get_user_confirmation(i18n.t("reset_scores")):
@@ -92,18 +92,10 @@ class MainController:
         self.learning_data.clear_scores()
         self.repository.update_dictionary(**self.learning_data.__dict__)
 
-    def change_word_per_session(self, value: Optional[int] = None):
+    def change_word_per_session(self, unused_value: Optional[int] = None):
         max_len = len(self.learning_data.dictionary)
-        if not value or value > max_len:
+        if self.gui.words_per_session > max_len:
             self.gui.change_words_per_session_value(max_len // 10 * 10)
-
-
-    def bind_return_event(self, event=None):
-        self.gui.bind("<Return>", self.create_session)
-        self.gui.unfocus_current_widget()
-
-    def unbind_return_event(self, event=None):
-        self.gui.unbind("<Return>")
 
     def update_widgets(self):
         self.gui.update_widgets(
@@ -124,3 +116,12 @@ class MainController:
             self.gui.filter_remove_word_combobox(list(filter(lambda word: value in word, self.learning_data.all_words)))
         else:
             self.gui.filter_remove_word_combobox(self.learning_data.all_words)
+
+    def bind_return_event(self, event=None):
+        self.gui.bind("<Return>", self.create_session)
+        self.gui.unfocus_current_widget()
+
+    def unbind_return_event(self, event=None):
+        self.gui.unbind("<Return>")
+
+

@@ -70,6 +70,6 @@ class NewDictHandlerForJSONRepo:
     def get_data(self) -> Any:
         return dict(
             name=self.validated_name,
-            dictionary={key: value for key, value in self.validated_data.items()},
+            dictionary=self.validated_data,
             scores={key: 0 for key in self.validated_data}
         )

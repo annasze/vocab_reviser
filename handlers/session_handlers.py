@@ -1,7 +1,6 @@
 import string
 
-threshold = 0.2
-transposition_cost = 1
+from settings import settings
 
 
 def remove_non_alpha(s: str) -> str:
@@ -29,7 +28,7 @@ def damerau_levenshtein_distance(str1: str, str2: str) -> int:
                                       )
                     if i > 1 and j > 1 and str1[i - 1] == str2[j - 2] and str1[i - 2] == str2[j - 1]:
                         m[i][j] = min(m[i][j],
-                                      m[i - 2][j - 2] + transposition_cost)
+                                      m[i - 2][j - 2] + settings.TRANSPOSITION_COST)
                 else:
                     m[i][j] = m[i - 1][j - 1]
 
@@ -81,7 +80,7 @@ def evaluate_user_input(
     )
     if result == 0:
         return "correct_answer"
-    elif result <= threshold:
+    elif result <= settings.THRESHOLD:
         return "partially_correct_answer"
     else:
         return "incorrect_answer"

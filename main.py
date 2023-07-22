@@ -1,9 +1,9 @@
 import i18n
 
-import main_handlers
-from main_controller import MainController
-from main_gui import MainGui
-from repository import JSONRepository
+from handlers import main_handlers
+from controllers.main_controller import MainController
+from GUIs.main_gui import MainGui
+from data.repository import JSONRepository
 from settings import settings
 
 

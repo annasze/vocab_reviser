@@ -1,9 +1,9 @@
 import time
 from pathlib import Path
 
-from session_gui import SessionGui
-from learning_data import LearningData
-from repository import RepositoryProtocol
+from GUIs.session_gui import SessionGui
+from data.learning_data import LearningData
+from data.repository import RepositoryProtocol
 from settings import SessionSettings
 
 

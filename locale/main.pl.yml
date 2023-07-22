@@ -33,7 +33,6 @@ pl:
   your_lang: Twój język
   foreign_lang: język obcy
   error: Błąd
-  exit: Wyjście
   success: Sukces!
   are_you_sure: Jesteś pewien/pewna?
   add_word: Dodaj słowo
@@ -43,7 +42,7 @@ pl:
   info: Informacja
   note: |-
     Pierwsza kolumna w pliku powinna zawierać słowa/frazy w Twoim języku, druga - w języku obcym.
-    Akceptowalne formaty plików - xls, xlsx, xlsm, xlsb. Akceptowany rozmiar - do 200 wierszy.
+    Akceptowalne formaty plików - xls, xlsx, xlsm, xlsb. Akceptowany rozmiar - od 10 do 200 wierszy.
     NIE używaj nagłówków kolumn.
     --- Odznacz 'wyświetl powiadomienie', by nie wyświetlać ponownie tego okna ---
   already_exists: To słowo już istnieje.
