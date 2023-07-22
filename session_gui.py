@@ -4,15 +4,6 @@ import customtkinter as ctk
 import i18n
 
 
-default_color_theme = "blue"
-
-LOCALE = {
-    "polski": "pl",
-    "English": "en",
-    "español": "es"
-}
-
-
 class SessionGuiProtocol(Protocol):
     def configure_ui(self, controller) -> None:
         ...
@@ -52,7 +43,7 @@ class SessionGuiProtocol(Protocol):
         ...
 
 
-class SessionGui(ctk.CTk):
+class SessionGui(ctk.CTkToplevel):
     def __init__(self):
         super().__init__()
         self.resizable(False, False)
@@ -83,6 +74,7 @@ class SessionGui(ctk.CTk):
         self.show_first_letter_button.grid(column=1, row=0, padx=(0, 25))
         self.submit_button = ctk.CTkButton(self.lower_buttons_frame, width=80, state="disabled")
         self.submit_button.grid(column=2, row=0, padx=(0, 25))
+        self.grab_set()
         self.set_texts()
 
     def configure_ui(self, controller) -> None:
@@ -145,6 +137,9 @@ class SessionGui(ctk.CTk):
             self.submit_button.configure(state="normal")
         else:
             self.submit_button.configure(state="disabled")
+
+    def disable_submit_btn(self):
+        self.submit_button.configure(state="disabled")
 
     def step_progressbar(self):
         self.progressbar.step()

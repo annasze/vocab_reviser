@@ -1,0 +1,34 @@
+{
+    "appearance_mode": "Dark",
+    "dictionary_name": "anna",
+    "ignore_capitalization": true,
+    "ignore_punctuation": false,
+    "seconds": 7,
+    "words_per_session": 20,
+    "textbox": "",
+    "app_language": "espa\u00f1ol",
+    "show_info_chb": true,
+    "app_language_versions": [
+        "English",
+        "polski",
+        "espa\u00f1ol"
+    ],
+    "words_per_session_seg_btn": [
+        10,
+        20,
+        30,
+        40,
+        50
+    ],
+    "seconds_seg_btn": [
+        1,
+        3,
+        5,
+        7,
+        9
+    ],
+    "appearance_mode_om": [
+        "Dark",
+        "Light"
+    ]
+}

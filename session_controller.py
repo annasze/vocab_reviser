@@ -81,6 +81,7 @@ class SessionController:
         self.gui.clear_correct_answer_label()
 
     def handle_submit(self, event=None):
+        self.gui.disable_submit_btn()
         result = self.handlers.evaluate_user_input(
             ignore_capitalization=self.settings.ignore_capitalization,
             ignore_punctuation=self.settings.ignore_punctuation,
@@ -101,4 +102,3 @@ class SessionController:
 
     def show_first_letter(self):
         self.gui.insert_first_letter(self.learning_data.first_letter)
-

@@ -17,6 +17,8 @@ class LearningData:
             self.session_list = random.sample(list(self.dictionary.keys()), words_per_session)
 
     def add_word(self, word: str, translation: str) -> None:
+        if not word or not translation:
+            return
         self.dictionary[word] = translation
         self.scores[word] = 0
 
@@ -50,3 +52,8 @@ class LearningData:
     @property
     def word(self) -> str:
         return self.session_list[-1]
+
+    @property
+    def all_words(self) -> str:
+        return list(self.dictionary)
+
