@@ -1,0 +1,50 @@
+es:
+  manage_dicts_lb: |-
+    Administrar
+    los diccionarios
+  switch_dict_lb: Cambiar del diccionario
+  remove_dict_lb: Eliminar el diccionario
+  add_new_dict_lb: |-
+    Agregar diccionario
+    del archivo xls
+  new_dict_name: introduce el nombre...
+  browse_btn: Navegar
+  current_dict_lb: Diccionario actual
+  show_list_btn: |-
+    Mostrar lista 
+    de palabras
+  reset_scores: Borrar puntos
+  start_btn: INICIAR
+  notes_lb: Notas
+  appearance_mode_lb: Modo de apariencia
+  words_per_session_lb: Palabras por sesión
+  sec_lb: |-
+    Tiempo de espera (seg.)
+    - respuesta incorrecta
+  ignore_lb: Ignorar
+  capitalization_switch: capitalización
+  punctuation: punctuación
+  language_lb: Idioma
+  submit: Enviar
+  remove_word_lb2: |-
+    (escribe un par de letras
+    para acotar la lista)
+  add_word_lb: Agregar palabra/frase
+  foreign_lang: idioma extranjero
+  your_lang: tu idioma
+  remove_word_lb: Eliminar palabra/frase
+  confirm: Confirmar
+  show_info_chb: mostrar notificación
+  error: Error
+  success: Éxito
+  are_you_sure: ¿Estás seguro/a?
+  add_word: Agregar palabra
+  error_loading_file: Se ha producido un error. Verifica el archivo y vuelve a intentarlo.
+  added: El diccionario se ha agregado con éxito.
+  info: Información
+  note: |-
+    La primera columna en el archivo debe contener las palabras/frases en tu idioma, la segunda - en el idioma extranjero.
+    Formatos de archivo aceptados - xls, xlsx, xlsm, xlsb. Tamaño aceptado: de 10 a 200 filas.
+    NO uses encabezados de columna.
+    --- Desmarca 'mostrar notificación' para desactivar esta notificación ---
+  forbidden: No puedes eliminar el último diccionario disponible. Agrega uno nuevo y vuelve a intentarlo.

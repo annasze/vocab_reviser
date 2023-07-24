@@ -9,13 +9,9 @@ en:
   browse_btn: Browse
   current_dict_lb: Current dictionary
   show_list_btn: Show word list
-  show_session_list_btn: |-
-    Show last session
-    word list
   reset_scores: Reset points
   start_btn: START
   notes_lb: Notes
-  save_to_file_btn: Save as...
   appearance_mode_lb: Appearance mode
   words_per_session_lb: Words per session
   sec_lb: |-
@@ -39,7 +35,6 @@ en:
   success: Success
   are_you_sure: Are you sure?
   add_word: Add word
-  cannot_add_word: Error during adding word. Check if it's already in the dictionary.
   error_loading_file: An error occurred. Check the file and try again.
   added: The dictionary has been added successfully.
   info: Information
@@ -48,5 +43,4 @@ en:
     Accepted file formats - xls, xlsx, xlsm, xlsb. Accepted size - from 10 to 200 rows.
     Do NOT use column headings.
     --- Uncheck 'display notification' to not display this window again ---
-  already_exists: This word already exists.
   forbidden: You cannot delete the last available dictionary. Add a new one and try again.

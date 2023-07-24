@@ -12,7 +12,6 @@ pl:
   reset_scores: Resetuj punkty
   start_btn: START
   notes_lb: Notatki
-  save_to_file_btn: Zapisz jako ...
   appearance_mode_lb: Tryb wyświetlania
   words_per_session_lb: Liczba słów na sesję
   sec_lb: |-
@@ -36,7 +35,6 @@ pl:
   success: Sukces!
   are_you_sure: Jesteś pewien/pewna?
   add_word: Dodaj słowo
-  cannot_add_word: Wystąpił błąd. Sprawdź czy słowo już nie istnieje w słowniku
   error_loading_file: Wystąpił błąd. Sprawdź plik i spróbuj ponownie.
   added: Słownik został dodany.
   info: Informacja
@@ -45,7 +43,6 @@ pl:
     Akceptowalne formaty plików - xls, xlsx, xlsm, xlsb. Akceptowany rozmiar - od 10 do 200 wierszy.
     NIE używaj nagłówków kolumn.
     --- Odznacz 'wyświetl powiadomienie', by nie wyświetlać ponownie tego okna ---
-  already_exists: To słowo już istnieje.
   forbidden: Nie można usunąć jedynego słownika. Dodaj nowy i spróbuj ponownie.
 
 
