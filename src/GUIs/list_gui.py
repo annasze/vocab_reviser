@@ -3,7 +3,7 @@ import tkinter.ttk as ttk
 import customtkinter as ctk
 import i18n
 
-from settings import settings
+from src.settings import AppSettings
 
 
 class WordList(ctk.CTkToplevel):
@@ -47,15 +47,15 @@ class WordList(ctk.CTkToplevel):
     @staticmethod
     def divide_frase(phrase: str, max_length: int):
         """ Divides a long phrase in half so that it fits in the table.
-            Ttk does not provide an automatic line breakage. """
-        if len(phrase) < max_length:
+            TTk does not provide an automatic line breakage in treeview. """
+        if len(phrase) <= max_length:
             return phrase
 
         inx = max(filter(lambda i: phrase[i] == " ", range(max_length + 1)))
-        print(inx, max_length)
+
         return phrase[:inx] + "\n" + phrase[inx + 1:]
 
-    def configure_style(self, mode: str):
+    def configure_style(self, mode: str, settings: AppSettings):
         """ Treeview widget is not available in customtkinter,
             so manual style configuration is necessary
             to match the style in the entire app. """

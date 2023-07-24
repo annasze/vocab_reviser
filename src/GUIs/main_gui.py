@@ -4,8 +4,6 @@ from typing import Protocol
 import customtkinter as ctk
 import i18n
 
-from settings import settings
-
 
 class MainGuiProtocol(Protocol):
     def set_texts(self) -> None:
@@ -27,7 +25,8 @@ class MainGuiProtocol(Protocol):
     def settings(self) -> dict[str, str]:
         ...
 
-    def change_app_language(self, language: str):
+    @property
+    def session_settings(self):
         ...
 
     def change_words_per_session_value(self, new_value):
@@ -190,7 +189,6 @@ class MainGui(ctk.CTk):
         self.punctuation_switch = ctk.CTkSwitch(self.bottom_frame, onvalue=True, offvalue=False,
                                                 variable=self.ignore_punctuation)
         self.punctuation_switch.grid(column=5, row=2, padx=(25, 20), sticky="w")
-
         self.set_texts()
 
     def set_texts(self) -> None:
@@ -221,8 +219,8 @@ class MainGui(ctk.CTk):
         self.show_info_chb.configure(text=i18n.t("main.show_info_chb"))
         self.confirm_btn.configure(text=i18n.t("main.confirm"))
 
-    def configure_ui(self, user_settings) -> None:
-        ctk.set_default_color_theme(settings.DEFAULT_COLOR_THEME)
+    def configure_ui(self, user_settings, app_settings) -> None:
+        ctk.set_default_color_theme(app_settings.DEFAULT_COLOR_THEME)
         ctk.set_appearance_mode(user_settings.appearance_mode)
         self.words_per_session_var.set(value=user_settings.words_per_session)
         self.seconds.set(value=user_settings.seconds)
@@ -239,12 +237,11 @@ class MainGui(ctk.CTk):
         self.seconds_seg_btn.configure(values=user_settings.seconds_seg_btn)
         self.appearance_mode_om.configure(values=user_settings.appearance_mode_om)
         self.appearance_mode_om.set(value=user_settings.appearance_mode)
-        self.change_app_language(language=user_settings.app_language)
 
     def set_commands(self, controller):
         self.reset_scores.configure(command=controller.reset_scores)
         self.add_word_btn.configure(command=controller.add_word)
-        self.current_app_language.configure(command=self.change_app_language)
+        self.current_app_language.configure(command=controller.change_app_language)
         self.appearance_mode_om.configure(command=ctk.set_appearance_mode)
         self.remove_dict_om.configure(command=controller.remove_dictionary)
         self.switch_dict_om.configure(command=controller.switch_dictionary)
@@ -282,8 +279,10 @@ class MainGui(ctk.CTk):
             self.new_dict_name.delete(0, ctk.END)
         self.remove_word_var.set(value="")
         self.remove_word_cb.configure(values=words)
-        self.word_ent.delete(0, ctk.END)
-        self.translation_ent.delete(0, ctk.END)
+        if self.word_ent.get():
+            self.word_ent.delete(0, ctk.END)
+        if self.translation_ent.get():
+            self.translation_ent.delete(0, ctk.END)
 
     @property
     def settings(self) -> dict[str, str]:
@@ -303,9 +302,14 @@ class MainGui(ctk.CTk):
             "appearance_mode_om": self.appearance_mode_om.cget("values")
         }
 
-    def change_app_language(self, language: str):
-        i18n.set("locale", settings.LOCALE[language])
-        self.set_texts()
+    @property
+    def session_settings(self):
+        return {
+            "seconds": self.seconds.get(),
+            "words_per_session": self.words_per_session_var.get(),
+            "ignore_capitalization": self.ignore_capitalization.get(),
+            "ignore_punctuation": self.ignore_punctuation.get(),
+        }
 
     def change_words_per_session_value(self, new_value):
         self.words_per_session_var.set(value=new_value)

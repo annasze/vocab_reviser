@@ -1,18 +1,16 @@
 import string
 
-from settings import settings
-
 
 def remove_non_alpha(s: str) -> str:
     """Removes non-alphanumeric characters."""
     return "".join(letter for letter in s if letter.isalpha())
 
 
-def damerau_levenshtein_distance(str1: str, str2: str) -> int:
+def damerau_levenshtein_distance(str1: str, str2: str, transposition_cost: int | float) -> int:
     """https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
     Helps to evaluate correctness of user_input"""
 
-    m = [[0 for i in range(len(str2) + 1)] for j in range(len(str1) + 1)]
+    m = [[0 for _ in range(len(str2) + 1)] for _ in range(len(str1) + 1)]
 
     for i in range(len(str1) + 1):
         for j in range(len(str2) + 1):
@@ -28,7 +26,7 @@ def damerau_levenshtein_distance(str1: str, str2: str) -> int:
                                       )
                     if i > 1 and j > 1 and str1[i - 1] == str2[j - 2] and str1[i - 2] == str2[j - 1]:
                         m[i][j] = min(m[i][j],
-                                      m[i - 2][j - 2] + settings.TRANSPOSITION_COST)
+                                      m[i - 2][j - 2] + transposition_cost)
                 else:
                     m[i][j] = m[i - 1][j - 1]
 
@@ -57,14 +55,15 @@ def apply_dld(
         ignore_capitalization: bool,
         ignore_punctuation: bool,
         correct_answer: str,
-        user_input: str
+        user_input: str,
+        transposition_cost: float | int
 ) -> tuple[float, bool]:
     if ignore_punctuation or ignore_capitalization:
         user_input, correct_answer = adjust_strings(
             ignore_capitalization, ignore_punctuation,
             correct_answer, user_input)
     # calculate the D-L distance
-    dld = damerau_levenshtein_distance(user_input, correct_answer)
+    dld = damerau_levenshtein_distance(user_input, correct_answer, transposition_cost)
     return dld
 
 
@@ -72,15 +71,17 @@ def evaluate_user_input(
         ignore_capitalization: bool,
         ignore_punctuation: bool,
         correct_answer: str,
-        user_input: str
+        user_input: str,
+        transposition_cost: float | int,
+        threshold: float
 ):
     result = apply_dld(
         ignore_capitalization, ignore_punctuation,
-        correct_answer, user_input
+        correct_answer, user_input, transposition_cost
     )
     if result == 0:
         return "correct_answer"
-    elif result <= settings.THRESHOLD:
+    elif result <= threshold:
         return "partially_correct_answer"
     else:
         return "incorrect_answer"

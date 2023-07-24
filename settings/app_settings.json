@@ -1,0 +1,29 @@
+{
+    "DEFAULT_COLOR_THEME": "blue",
+    "LIGHT_THEME": {
+        "background": "gray86",
+        "foreground": "black"
+    },
+    "DARK_THEME": {
+        "background": "gray17",
+        "foreground": "#DCE4EE"
+    },
+    "LIGHT_THEME_HEADING": {
+        "background": "#3B8ED0",
+        "foreground": "#DCE4EE"
+    },
+    "DARK_THEME_HEADING": {
+        "background": "#1F6AA5",
+        "foreground": "#DCE4EE"
+    },
+    "LOCALE": {
+        "polski": "pl",
+        "English": "en",
+        "espa\u00f1ol": "es"
+    },
+    "DB_PATH": "data/json_db.json",
+    "USER_SETTINGS_PATH": "settings/user_settings.json",
+    "MAX_PHRASE_LENGTH": 60,
+    "THRESHOLD": 0.2,
+    "TRANSPOSITION_COST": 1
+}

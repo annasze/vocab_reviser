@@ -10,11 +10,11 @@ class LearningData:
         self.session_list = None
 
     def fill_in_session_list(self, words_per_session: int):
-        if words_per_session * 2 >= len(self.dictionary):
-            self.session_list = random.sample([elem[0] for elem in self.scores.most_common()[-2*words_per_session:]],
+        if words_per_session * 2 < len(self.dictionary):
+            self.session_list = random.sample([elem[0] for elem in self.scores.most_common()][-2 * words_per_session:],
                                               words_per_session)
         else:
-            self.session_list = random.sample(list(self.dictionary.keys()), words_per_session)
+            self.session_list = random.sample(list(self.dictionary), min(words_per_session, len(self.dictionary)))
 
     def add_word(self, word: str, translation: str) -> None:
         if not word or not translation:
@@ -56,4 +56,3 @@ class LearningData:
     @property
     def all_words(self) -> str:
         return list(self.dictionary)
-

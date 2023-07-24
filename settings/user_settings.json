@@ -6,8 +6,8 @@
     "seconds": 1,
     "words_per_session": 20,
     "textbox": "",
-    "app_language": "espa\u00f1ol",
-    "show_info_chb": true,
+    "app_language": "English",
+    "show_info_chb": false,
     "app_language_versions": [
         "English",
         "polski",

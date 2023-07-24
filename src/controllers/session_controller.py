@@ -1,14 +1,9 @@
 import time
-from pathlib import Path
 
-from GUIs.session_gui import SessionGui
-from data.learning_data import LearningData
-from data.repository import RepositoryProtocol
-from settings import SessionSettings
-
-
-PATH = Path.cwd() / "settings.json"
-MAX_WORD_LENGTH = 60
+from src.GUIs.session_gui import SessionGui
+from src.data.learning_data import LearningData
+from src.data.repository import RepositoryProtocol
+from src.settings import SessionSettings, AppSettings
 
 
 class SessionControllerProtocol:
@@ -41,17 +36,18 @@ class SessionController:
             repository: RepositoryProtocol,
             learning_data: LearningData,
             handlers,
-            settings: SessionSettings
+            session_settings: SessionSettings,
+            app_settings: AppSettings
     ):
         self.gui = gui
         self.repository = repository
         self.handlers = handlers
-        self.settings = settings
+        self.session_settings = session_settings
+        self.app_settings = app_settings
         self.learning_data: LearningData = learning_data
 
     def start_session(self):
-        self.learning_data.fill_in_session_list(self.settings.words_per_session)
-
+        self.learning_data.fill_in_session_list(self.session_settings.words_per_session)
         self.gui.create_special_letters_buttons(
             self.handlers.extract_special_letters(list(self.learning_data.dictionary.values())))
         self.gui.configure_ui(self)
@@ -63,11 +59,11 @@ class SessionController:
         self.gui.change_color_of_user_input_field(color="#00FF00")
         time.sleep(1)
         self.gui.clear_user_input_field()
-        self.gui.change_color_of_user_input_field(("gray10", "#DCE4EE"))
+        self.gui.change_color_of_user_input_field(tuple(self.app_settings.DARK_THEME.values()))
 
     def handle_partially_correct_answer(self):
         self.gui.show_correct_answer(self.learning_data.correct_answer)
-        time.sleep(self.settings.seconds)
+        time.sleep(self.session_settings.seconds)
         self.gui.clear_user_input_field()
         self.gui.clear_correct_answer_label()
 
@@ -75,18 +71,20 @@ class SessionController:
         self.learning_data.update_score(-1)
         self.gui.show_correct_answer(self.learning_data.correct_answer)
         self.gui.change_color_of_user_input_field(color="red")
-        time.sleep(self.settings.seconds)
-        self.gui.change_color_of_user_input_field(("gray10", "#DCE4EE"))
+        time.sleep(self.session_settings.seconds)
+        self.gui.change_color_of_user_input_field(tuple(self.app_settings.DARK_THEME.values()))
         self.gui.clear_user_input_field()
         self.gui.clear_correct_answer_label()
 
     def handle_submit(self, event=None):
         self.gui.disable_submit_btn()
         result = self.handlers.evaluate_user_input(
-            ignore_capitalization=self.settings.ignore_capitalization,
-            ignore_punctuation=self.settings.ignore_punctuation,
+            ignore_capitalization=self.session_settings.ignore_capitalization,
+            ignore_punctuation=self.session_settings.ignore_punctuation,
             correct_answer=self.learning_data.correct_answer,
-            user_input=self.gui.get_user_input
+            user_input=self.gui.get_user_input,
+            transposition_cost=self.app_settings.TRANSPOSITION_COST,
+            threshold=self.app_settings.THRESHOLD
         )
         getattr(self, "handle_" + result)()
         self.manage_session_flow()

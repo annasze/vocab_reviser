@@ -79,7 +79,7 @@ class SessionGui(ctk.CTkToplevel):
 
     def configure_ui(self, controller) -> None:
         self.progressbar.set(value=0)
-        self.progressbar.configure(determinate_speed=50 / controller.settings.words_per_session)
+        self.progressbar.configure(determinate_speed=50 / controller.session_settings.words_per_session)
         self.show_first_letter_button.configure(command=controller.show_first_letter)
         self.clear_button.configure(command=self.clear_user_input_field)
         self.submit_button.bind('<Button-1>', controller.handle_submit)

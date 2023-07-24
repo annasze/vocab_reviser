@@ -55,3 +55,4 @@ class JSONRepository:
         with open(self.path, "r", encoding="UTF-8") as db:
             return list(json.load(db))
 
+

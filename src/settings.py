@@ -1,23 +1,22 @@
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from handlers.new_dictionary_handler import NewDictHandlerForJSONRepo
-
 
 @dataclass
 class AppSettings:
-    DEFAULT_COLOR_THEME: str = "blue"
-    LIGHT_THEME: dict[str, str] = field(default_factory=lambda: dict(background="gray86", foreground="black"))
-    DARK_THEME: dict[str, str] = field(default_factory=lambda: dict(background="gray17", foreground="#DCE4EE"))
-    LIGHT_THEME_HEADING: dict[str, str] = field(default_factory=lambda: dict(background="#3B8ED0", foreground="#DCE4EE"))
-    DARK_THEME_HEADING: dict[str, str] = field(default_factory=lambda: dict(background="#1F6AA5", foreground="#DCE4EE"))
-    LOCALE: dict[str, str] = field(default_factory=lambda: dict(polski="pl", English="en", español="es"))
-    DB_PATH: Path = Path("json_db.json")
-    USER_SETTINGS_PATH: str = Path("settings.json")
-    MAX_PHRASE_LENGTH: int = 60
-    NEW_DICT_HANDLER = NewDictHandlerForJSONRepo
-    THRESHOLD: float = 0.2
-    TRANSPOSITION_COST: float | int = 1
+    __slots__ = ['DEFAULT_COLOR_THEME', 'LIGHT_THEME', 'DARK_THEME', 'LIGHT_THEME_HEADING', 'DARK_THEME_HEADING',
+                 'LOCALE', 'DB_PATH', 'USER_SETTINGS_PATH', 'MAX_PHRASE_LENGTH', 'THRESHOLD', 'TRANSPOSITION_COST']
+    DEFAULT_COLOR_THEME: str
+    LIGHT_THEME: dict[str, str]
+    DARK_THEME: dict[str, str]
+    LIGHT_THEME_HEADING: dict[str, str]
+    DARK_THEME_HEADING: dict[str, str]
+    LOCALE: dict[str, str]
+    DB_PATH: Path
+    USER_SETTINGS_PATH: str
+    MAX_PHRASE_LENGTH: int
+    THRESHOLD: float
+    TRANSPOSITION_COST: float | int
 
 
 @dataclass
@@ -50,4 +49,3 @@ class SessionSettings:
     seconds: int
 
 
-settings = AppSettings()

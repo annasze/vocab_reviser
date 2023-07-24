@@ -2,12 +2,18 @@ import json
 from pathlib import Path
 
 
-from settings import settings, UserSettings
+from src.settings import UserSettings, AppSettings
+from src.handlers.new_dictionary_handler import NewDictHandlerForJSONRepo
 
 
-def get_user_settings(file: Path):
-    settings_dict = json.loads(file.read_text(encoding="utf-8"))
+def get_user_settings(file: str):
+    settings_dict = json.loads(Path(file).read_text(encoding="utf-8"))
     return UserSettings(**settings_dict)
+
+
+def get_app_settings(file: str):
+    settings_dict = json.loads(Path(file).read_text(encoding="utf-8"))
+    return AppSettings(**settings_dict)
 
 
 def save_user_settings(settings_dict: dict[str, str], file: Path) -> None:
@@ -18,10 +24,10 @@ def save_user_settings(settings_dict: dict[str, str], file: Path) -> None:
 def get_data(
         name: str,
         taken_names: list[str],
-        max_word_length: int = settings.MAX_PHRASE_LENGTH
+        settings: AppSettings
 ) -> tuple[str, dict]:
     return (
-        settings.NEW_DICT_HANDLER(name, taken_names, max_word_length)
+        NewDictHandlerForJSONRepo(name, taken_names, settings.MAX_PHRASE_LENGTH)
         .validate_name(name)
         .set_file_path()
         .load_raw_file()
