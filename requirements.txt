@@ -1,0 +1,8 @@
+Babel
+customtkinter
+darkdetect
+et-xmlfile
+openpyxl
+python-i18n[YAML]
+PyYAML
+
