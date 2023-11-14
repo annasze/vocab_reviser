@@ -7,7 +7,7 @@
     "words_per_session": 20,
     "textbox": "",
     "app_language": "English",
-    "show_info_chb": false,
+    "show_info_chb": true,
     "app_language_versions": [
         "English",
         "polski",
