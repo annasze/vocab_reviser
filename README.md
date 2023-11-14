@@ -11,10 +11,10 @@ Built with thinter/customtkinter
 
 Main window
 
-![vocab_reviser_1](https://github.com/annasze/vocab_reviser_refactored/assets/116809427/11909f33-4e6a-4d89-a086-87171ef8264b)
+![vocab_reviser_1](https://github.com/annasze/vocab_reviser/assets/116809427/ed1e90af-ba44-4429-b6e6-4edff0174dba)
 
 
 Session window
 
-![vocab_2](https://github.com/annasze/vocab_reviser_refactored/assets/116809427/e15edd7e-636c-44d0-a3d0-b2066187e72e)
+![vocab_2](https://github.com/annasze/vocab_reviser/assets/116809427/b7e7a5e9-3577-41ed-9801-308577dbd414)
 
