@@ -1,8 +1,8 @@
-Babel
-customtkinter
-darkdetect
-et-xmlfile
-openpyxl
-python-i18n[YAML]
-PyYAML
+Babel==2.12.1
+customtkinter==5.2.0
+darkdetect==0.8.0
+et-xmlfile==1.1.0
+openpyxl==3.1.2
+python-i18n==0.3.9
+PyYAML==6.0.1
 
